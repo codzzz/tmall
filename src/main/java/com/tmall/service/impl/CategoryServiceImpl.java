@@ -7,34 +7,33 @@ import org.springframework.stereotype.Service;
 
 import com.tmall.mapper.CategoryMapper;
 import com.tmall.pojo.Category;
+import com.tmall.pojo.CategoryExample;
 import com.tmall.service.CategoryService;
-import com.tmall.util.Page;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired
 	CategoryMapper categorymapper;
 	@Override
-	public List<Category> list(Page page) {
+	public List<Category> list() {
 		// TODO Auto-generated method stub
-		return categorymapper.list(page);
-	}
-	public int total() {
-		return categorymapper.total();
+		CategoryExample example = new CategoryExample();
+		example.setOrderByClause("id desc");
+		return categorymapper.selectByExample(example);
 	}
 	@Override
 	public void add(Category category) {
-		categorymapper.add(category);
+		categorymapper.insert(category);
 	}
 	@Override
 	public void delete(int id) {
-		categorymapper.delete(id);
+		categorymapper.deleteByPrimaryKey(id);
 	}
 	@Override
 	public Category get(int id) {
-		return categorymapper.get(id);
+		return categorymapper.selectByPrimaryKey(id);
 	}
 	@Override
 	public void update(Category category) {
-		categorymapper.update(category);
+		categorymapper.updateByPrimaryKeySelective(category);
 	}
 }

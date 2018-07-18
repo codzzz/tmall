@@ -38,7 +38,7 @@ public class ImageUtil {
 	public static void resizeImage(File srcFile,int width,int height,File destFile) {
 		try {
 			if (!destFile.getParentFile().exists()) {
-				destFile.getParentFile().exists();
+				destFile.getParentFile().mkdirs();
 				Image i = ImageIO.read(srcFile);
 				i = resizeImage(i, width, height);
 				ImageIO.write((RenderedImage) i, "jpg", destFile);
