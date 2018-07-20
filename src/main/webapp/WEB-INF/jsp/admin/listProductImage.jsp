@@ -23,7 +23,7 @@
 <div class="workingArea">
 	<ol class="breadcrumb">
 		<li><a href="admin_list_category">所有分类</a></li>
-		<li><a href="admin_list_product?${p.cid}">${p.category.name}</a></li>
+		<li><a href="admin_product_list?cid=${p.cid}">${p.category.name}</a></li>
 		<li class="active">${p.name}</li>
 		<li class="active">产品图片管理</li>
 	</ol>

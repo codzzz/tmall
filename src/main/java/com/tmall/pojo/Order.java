@@ -1,6 +1,9 @@
 package com.tmall.pojo;
 
 import java.util.Date;
+import java.util.List;
+
+import com.tmall.service.OrderService;
 
 public class Order {
     private Integer id;
@@ -28,6 +31,16 @@ public class Order {
     private Integer uid;
 
     private String status;
+    
+    private List<OrderItem> orderItems;
+    
+    private User user;
+    
+    private float total;
+    
+    private int totalNumber;
+    
+    private String statusDesc;
 
     public Integer getId() {
         return id;
@@ -132,4 +145,68 @@ public class Order {
     public void setStatus(String status) {
         this.status = status == null ? null : status.trim();
     }
+
+	public List<OrderItem> getOrderItems() {
+		return orderItems;
+	}
+
+	public void setOrderItems(List<OrderItem> orderItems) {
+		this.orderItems = orderItems;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public float getTotal() {
+		return total;
+	}
+
+	public void setTotal(float total) {
+		this.total = total;
+	}
+
+	public int getTotalNumber() {
+		return totalNumber;
+	}
+
+	public void setTotalNumber(int totalNumber) {
+		this.totalNumber = totalNumber;
+	}
+    
+	public String getStatusDesc() {
+		String desc = "未知";
+		switch (status) {
+		case OrderService.waitPay:
+			desc = "等待支付";
+			break;
+		case OrderService.waitDelivery:
+			desc = "等待发货";
+			break;
+		case OrderService.waitConfirm:
+			desc = "等待收货";
+			break;
+		case OrderService.waitReview:
+			desc = "等待评价";
+			break;
+		case OrderService.finish:
+			desc = "订单完成";
+			break;
+		case OrderService.delete:
+			desc = "订单删除";
+			break;
+		default:
+			desc = "未知";
+			break;
+		}
+		return desc;
+	}
+
+	public void setStatusDesc(String statusDesc) {
+		this.statusDesc = statusDesc;
+	}
 }

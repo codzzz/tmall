@@ -21,6 +21,8 @@ public class Product {
 
     private Category category;
     
+    private ProductImage pImage;
+    
     public Integer getId() {
         return id;
     }
@@ -91,6 +93,14 @@ public class Product {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public ProductImage getpImage() {
+		return pImage;
+	}
+
+	public void setpImage(ProductImage pImage) {
+		this.pImage = pImage;
 	}
     
 }

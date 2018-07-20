@@ -9,7 +9,9 @@ import com.tmall.mapper.ProductMapper;
 import com.tmall.pojo.Category;
 import com.tmall.pojo.Product;
 import com.tmall.pojo.ProductExample;
+import com.tmall.pojo.ProductImage;
 import com.tmall.service.CategoryService;
+import com.tmall.service.ProductImageService;
 import com.tmall.service.ProductService;
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -18,6 +20,8 @@ public class ProductServiceImpl implements ProductService {
 	ProductMapper mapper;
 	@Autowired
 	CategoryService categoryService;
+	@Autowired
+	ProductImageService piService;
 	@Override
 	public void add(Product product) {
 		mapper.insert(product);
@@ -35,7 +39,11 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product get(int pid) {
-		return mapper.selectByPrimaryKey(pid);
+		Product product = mapper.selectByPrimaryKey(pid);
+		 Category c = categoryService.get(product.getCid());
+		 product.setCategory(c);
+		 setImage(product);
+		return product;
 	}
 
 	@Override
@@ -45,6 +53,7 @@ public class ProductServiceImpl implements ProductService {
 		example.setOrderByClause("id desc");
 		List<Product> result = mapper.selectByExample(example);
 		setCategory(result);
+		setImage(result);
 		return result;
 	}
 	public void setCategory(List<Product> ps){
@@ -55,5 +64,14 @@ public class ProductServiceImpl implements ProductService {
         int cid = p.getCid();
         Category c = categoryService.get(cid);
         p.setCategory(c);
+    }
+    public void setImage(List<Product> ps) {
+    		for (Product product : ps) {
+				setImage(product);
+			}
+    }
+    public void setImage(Product p) {
+    		ProductImage productImage = piService.list(p.getId(), "type_single").get(0);
+    		p.setpImage(productImage);
     }
 }
