@@ -1,6 +1,7 @@
 package com.tmall.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Product {
     private Integer id;
@@ -23,7 +24,31 @@ public class Product {
     
     private ProductImage pImage;
     
-    public Integer getId() {
+    private List<ProductImage> productSingleImages;
+    
+    private List<ProductImage> productDetailImages;
+    
+    private int saleCount;
+    
+    private int reviewCount;
+    
+    public int getSaleCount() {
+		return saleCount;
+	}
+
+	public void setSaleCount(int saleCount) {
+		this.saleCount = saleCount;
+	}
+
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
+	public Integer getId() {
         return id;
     }
 
@@ -101,6 +126,22 @@ public class Product {
 
 	public void setpImage(ProductImage pImage) {
 		this.pImage = pImage;
+	}
+
+	public List<ProductImage> getProductSingleImages() {
+		return productSingleImages;
+	}
+
+	public void setProductSingleImages(List<ProductImage> productSingleImages) {
+		this.productSingleImages = productSingleImages;
+	}
+
+	public List<ProductImage> getProductDetailImages() {
+		return productDetailImages;
+	}
+
+	public void setProductDetailImages(List<ProductImage> productDetailImages) {
+		this.productDetailImages = productDetailImages;
 	}
     
 }
