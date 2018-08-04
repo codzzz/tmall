@@ -23,6 +23,7 @@ public class OrderController {
 	
 	@RequestMapping("admin_order_list")
 	public String list(Model model,Page page) {
+		System.out.println("到这来了");
 		PageHelper.offsetPage(page.getStart(), page.getCount());
 		List<Order> os = oService.list();
 		Logger.getLogger(this.getClass()).debug("os size:"+os.size());
@@ -36,6 +37,7 @@ public class OrderController {
 	
 	@RequestMapping("admin_order_delivery")
 	public String delivery(Order order) {
+		System.out.println("发货发货啦");
 		order.setDeliveryDate(new Date());
 		order.setStatus(OrderService.waitConfirm);
 		oService.update(order);
